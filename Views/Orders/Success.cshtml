@@ -1,0 +1,29 @@
+﻿@model GlowBeauty_Shop.Models.Order
+@{
+    ViewData["Title"] = "สั่งซื้อสำเร็จ";
+}
+
+<div class="row justify-content-center my-5">
+    <div class="col-md-6 text-center">
+        <div class="card card-pink p-5">
+            <div class="display-1 text-success mb-3">
+                <i class="bi bi-check-circle-fill"></i>
+            </div>
+            <h2 class="fw-bold text-dark mb-2">สั่งซื้อสินค้าเรียบร้อยแล้ว!</h2>
+            <p class="text-muted">ขอบคุณที่ไว้วางใจ GlowBeauty Shop ทางเราจะรีบดำเนินการจัดส่งให้โดยเร็วที่สุดครับ</p>
+
+            <div class="bg-light p-3 rounded-3 text-start my-4">
+                <p class="mb-1"><strong>หมายเลขคำสั่งซื้อ:</strong> #@Model.Id</p>
+                <p class="mb-1"><strong>ผู้รับ:</strong> @Model.CustomerName (@Model.Phone)</p>
+                <p class="mb-1"><strong>สินค้า:</strong> @Model.Product?.Name</p>
+                <p class="mb-0"><strong>ยอดชำระ:</strong> <span class="text-danger fw-bold">฿@Model.TotalPrice.ToString("N0")</span></p>
+            </div>
+
+            <div class="d-grid gap-2">
+                <a asp-controller="Products" asp-action="Index" class="btn btn-pastel">
+                    <i class="bi bi-bag"></i> กลับไปเลือกซื้อสินค้าต่อ
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,147 @@
+﻿@model IEnumerable<GlowBeauty_Shop.Models.Product>
+
+@{
+    ViewData["Title"] = "GLOW BEAUTY - The Official Boutique";
+    var currentCategory = Context.Request.Query["category"].ToString();
+    var currentSkinType = Context.Request.Query["skinType"].ToString();
+    var currentSearch = Context.Request.Query["searchString"].ToString();
+}
+
+<div class="container py-5">
+    
+    <!-- Hero Header: เน้นชื่อแบรนด์เด่นสง่าแบบเคาน์เตอร์แบรนด์หรู -->
+    <div class="text-center mb-5">
+        <span class="text-uppercase tracking-wide small d-block mb-2" style="color: var(--luxury-gold-dark) !important; letter-spacing: 3px; font-size: 0.8rem;">
+            EXCEPTIONAL SKINCARE COLLECTION
+        </span>
+
+        <!-- ชื่อแบรนด์ขนาดใหญ่พิเศษด้วยฟอนต์ Serif ไฮเอนด์ -->
+        <h1 class="font-serif fw-bold text-dark mb-2 tracking-wide" style="font-size: 3.8rem; letter-spacing: 5px; line-height: 1.1;">
+            GLOW <span style="color: var(--luxury-gold); font-weight: 300;">BEAUTY</span>
+        </h1>
+
+        <p class="text-muted small tracking-medium mb-3" style="letter-spacing: 2px; font-size: 0.85rem;">
+            ผลิตภัณฑ์บำรุงผิวระดับพรีเมียม
+        </p>
+
+        <!-- เส้นใต้สีทองเรียบหรู -->
+        <div class="mx-auto" style="width: 60px; height: 1px; background-color: var(--luxury-gold);"></div>
+    </div>
+
+    <!-- Luxury Filter Bar -->
+    <div class="p-4 mb-5 rounded-0 border shadow-sm" style="background-color: var(--luxury-bg); border-color: var(--luxury-border) !important;">
+        <form method="get" asp-action="Index">
+            <div class="row g-3 align-items-end justify-content-center">
+                
+                <!-- 1. คัดกรองตามประเภทสินค้า -->
+                <div class="col-md-4">
+                    <label class="form-label small text-uppercase tracking-medium fw-semibold text-muted mb-2">ประเภทผลิตภัณฑ์</label>
+                    <select name="category" class="form-select border-0 rounded-0 px-3 py-2 small shadow-none">
+                        <option value="">-- ผลิตภัณฑ์ทั้งหมด --</option>
+                        <option value="Cleanser" selected="@(currentCategory == "Cleanser")">Cleanser (คลีนเซอร์)</option>
+                        <option value="Toner" selected="@(currentCategory == "Toner")">Toner (โทนเนอร์)</option>
+                        <option value="Serum" selected="@(currentCategory == "Serum")">Serum (เซรั่ม)</option>
+                        <option value="Moisturizer" selected="@(currentCategory == "Moisturizer")">Moisturizer (มอยส์เจอไรเซอร์)</option>
+                        <option value="Sunscreen" selected="@(currentCategory == "Sunscreen")">Sunscreen (กันแดด)</option>
+                        <option value="Mask" selected="@(currentCategory == "Mask")">Mask (มาสก์)</option>
+                        <option value="Makeup" selected="@(currentCategory == "Makeup")">Makeup (เครื่องสำอาง)</option>
+                    </select>
+                </div>
+
+                <!-- 2. คัดกรองตามสภาพผิวหน้า -->
+                <div class="col-md-4">
+                    <label class="form-label small text-uppercase tracking-medium fw-semibold text-muted mb-2">สภาพผิวหน้า</label>
+                    <select name="skinType" class="form-select border-0 rounded-0 px-3 py-2 small shadow-none">
+                        <option value="">-- สภาพผิวทั้งหมด --</option>
+                        <option value="ผิวธรรมดา" selected="@(currentSkinType == "ผิวธรรมดา")">ผิวธรรมดา</option>
+                        <option value="ผิวแห้ง" selected="@(currentSkinType == "ผิวแห้ง")">ผิวแห้ง</option>
+                        <option value="ผิวมัน" selected="@(currentSkinType == "ผิวมัน")">ผิวมัน</option>
+                        <option value="ผิวแพ้ง่าย" selected="@(currentSkinType == "ผิวแพ้ง่าย")">ผิวแพ้ง่าย</option>
+                        <option value="ผิวเป็นสิว" selected="@(currentSkinType == "ผิวเป็นสิว")">ผิวเป็นสิว</option>
+                        <option value="ทุกสภาพผิว" selected="@(currentSkinType == "ทุกสภาพผิว")">ทุกสภาพผิว</option>
+                    </select>
+                </div>
+
+                <!-- Action Button -->
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-luxury w-100 rounded-0 py-2 text-uppercase tracking-wide">
+                        กรองผลิตภัณฑ์
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div class="text-center mt-3 pt-3 border-top border-light d-flex justify-content-center align-items-center gap-3">
+            <span class="small text-muted">ต้องการเลือกดูทั้งหมดโดยไม่ระบุเงื่อนไข?</span>
+            <a asp-action="Index" class="text-dark text-uppercase small tracking-medium fw-semibold text-decoration-underline">
+                แสดงสินค้าทั้งหมด
+            </a>
+        </div>
+    </div>
+
+    <!-- Notice Alert (กรณีสลับมาดึงสินค้าแทน) -->
+    @if (ViewBag.FallbackMessage != null)
+    {
+        <div class="alert rounded-0 border-0 shadow-sm mb-4 text-center py-3" style="background-color: var(--luxury-bg); border-left: 3px solid var(--luxury-gold) !important;" role="alert">
+            <span class="small text-dark"><i class="bi bi-info-circle me-2"></i> @ViewBag.FallbackMessage</span>
+        </div>
+    }
+
+    <!-- Active Filters Badge -->
+    @if (!string.IsNullOrEmpty(currentCategory) || !string.IsNullOrEmpty(currentSkinType) || !string.IsNullOrEmpty(currentSearch))
+    {
+        <div class="d-flex align-items-center gap-2 mb-4 flex-wrap">
+            <span class="small text-muted tracking-medium text-uppercase me-2">เงื่อนไขปัจจุบัน:</span>
+            @if (!string.IsNullOrEmpty(currentCategory))
+            {
+                <span class="badge badge-gold-subtle rounded-0 px-3 py-2 text-uppercase">@currentCategory</span>
+            }
+            @if (!string.IsNullOrEmpty(currentSkinType))
+            {
+                <span class="badge badge-gold-subtle rounded-0 px-3 py-2 text-uppercase">@currentSkinType</span>
+            }
+            @if (!string.IsNullOrEmpty(currentSearch))
+            {
+                <span class="badge badge-dark-subtle rounded-0 px-3 py-2">"@currentSearch"</span>
+            }
+            <a asp-action="Index" class="small text-muted text-decoration-underline ms-2">ล้างตัวกรอง</a>
+        </div>
+    }
+
+    <!-- Product Grid -->
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card card-luxury h-100 rounded-0 border-0">
+                    
+                    <!-- Product Image Container -->
+                    <div class="position-relative overflow-hidden bg-light text-center" style="padding-top: 100%;">
+                        <img src="@item.ImageUrl" asp-append-version="true" class="card-img-top position-absolute top-0 start-0 w-100 h-100" alt="@item.Name" style="object-fit: cover;" />
+                    </div>
+
+                    <!-- Product Body -->
+                    <div class="card-body d-flex flex-column p-4 text-center">
+                        <div class="mb-2">
+                            <span class="badge badge-gold-subtle rounded-0 uppercase me-1">@item.Category</span>
+                            <span class="badge badge-dark-subtle rounded-0 uppercase">@item.SkinType</span>
+                        </div>
+
+                        <h5 class="font-serif fw-bold text-dark mb-2" style="font-size: 1.1rem; line-height: 1.3;">@item.Name</h5>
+                        <p class="text-muted small flex-grow-1 mb-3" style="font-size: 0.8rem; min-height: 2.4rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; opacity: 0.8;">
+                            @item.Description
+                        </p>
+
+                        <div class="pt-3 border-top w-100 d-flex align-items-center justify-content-between">
+                            <span class="fs-6 fw-bold tracking-wide text-dark">฿@item.Price.ToString("N0")</span>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-luxury-outline rounded-0 px-3 py-1 text-uppercase" style="font-size: 0.75rem;">
+                                รายละเอียด
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>

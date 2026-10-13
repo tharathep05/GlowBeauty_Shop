@@ -1,0 +1,35 @@
+﻿@model GlowBeauty_Shop.Models.Product
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container my-4">
+    <a asp-action="Index" class="btn btn-outline-secondary mb-3 border-0">
+        <i class="bi bi-arrow-left"></i> ย้อนกลับไปหน้ารายการสินค้า
+    </a>
+
+    <div class="card card-pink p-4">
+        <div class="row g-4">
+            <div class="col-md-5">
+                <img src="@Model.ImageUrl" class="img-fluid rounded-4 shadow-sm w-100" alt="@Model.Name">
+            </div>
+            <div class="col-md-7 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="mb-3">
+                        <span class="badge badge-pastel fs-6 me-2">@Model.Category</span>
+                        <span class="badge bg-secondary-subtle text-secondary fs-6">เหมาะสำหรับ: @Model.SkinType</span>
+                    </div>
+                    <h2 class="fw-bold text-dark mb-3">@Model.Name</h2>
+                    <h3 class="text-danger fw-bold mb-4">฿@Model.Price.ToString("N0")</h3>
+                    <p class="text-secondary leading-relaxed fs-6">@Model.Description</p>
+                </div>
+
+                <div class="mt-4 pt-3 border-top">
+                    <a asp-controller="Orders" asp-action="Create" asp-route-productId="@Model.Id" class="btn btn-pastel btn-lg w-100 py-3 shadow">
+                        <i class="bi bi-bag-check-fill me-2"></i> สั่งซื้อสินค้านี้เลย
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

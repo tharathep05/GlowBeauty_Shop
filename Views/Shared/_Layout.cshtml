@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GLOW BEAUTY</title>
+
+    <!-- Bootstrap CSS & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+
+    <!-- Luxury Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Noto+Serif+Thai:wght@300;400;600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Custom Luxury Style Sheet -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Header / Navigation Bar -->
+    <header class="border-bottom sticky-top bg-white">
+        <nav class="navbar navbar-expand-lg navbar-light py-3">
+            <div class="container">
+                <a class="navbar-brand font-serif fw-bold text-dark text-uppercase tracking-wide fs-3" asp-controller="Products" asp-action="Index">
+                    GLOW <span style="color: #c5a059;">BEAUTY</span>
+                </a>
+
+                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-3">
+                        <li class="nav-item">
+                            <a class="nav-link text-uppercase small tracking-wide fw-semibold text-dark" asp-controller="Products" asp-action="Index">คอลเลกชันสินค้า</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex align-items-center gap-3">
+                        <!-- ปุ่มเปิด Modal เข้าสู่ระบบ (MY ACCOUNT) -->
+                        <button type="button" class="btn btn-outline-dark rounded-0 px-3 py-1 small text-uppercase tracking-wide" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <i class="bi bi-person me-1"></i> เข้าสู่ระบบ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Body Content -->
+    <main role="main" class="flex-grow-1">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-top py-4 bg-light mt-auto text-center">
+        <div class="container">
+            <p class="small text-muted mb-0">&copy; @DateTime.Now.Year GLOW BEAUTY. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 📌 เรียกใช้งาน Login Modal จาก _LoginModal.cshtml -->
+    @await Html.PartialAsync("_LoginModal")
+
+    <!-- JavaScript Files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

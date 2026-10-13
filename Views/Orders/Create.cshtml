@@ -1,0 +1,59 @@
+﻿@model GlowBeauty_Shop.Models.Order
+@{
+    ViewData["Title"] = "สั่งซื้อสินค้า";
+}
+
+<div class="row justify-content-center my-4">
+    <div class="col-md-8">
+        <div class="card card-pink p-4">
+            <h3 class="fw-bold text-center text-danger mb-4"><i class="bi bi-cart-check me-2"></i>ยืนยันการสั่งซื้อ</h3>
+
+            <!-- รายละเอียดสรุปสินค้า -->
+            <div class="alert alert-light border rounded-3 p-3 mb-4 d-flex align-items-center">
+                <img src="@Model.Product?.ImageUrl" class="rounded me-3" style="width: 70px; height: 70px; object-fit: cover;">
+                <div class="flex-grow-1">
+                    <h6 class="fw-bold mb-1">@Model.Product?.Name</h6>
+                    <small class="text-muted">หมวดหมู่: @Model.Product?.Category</small>
+                </div>
+                <div class="text-end">
+                    <span class="fs-5 fw-bold text-danger">฿@Model.TotalPrice.ToString("N0")</span>
+                </div>
+            </div>
+
+            <!-- ฟอร์มกรอกข้อมูล -->
+            <form asp-action="Create" enctype="multipart/form-data" method="post">
+                <input type="hidden" asp-for="ProductId" />
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">ชื่อ-นามสกุล ผู้รับ <span class="text-danger">*</span></label>
+                    <input asp-for="CustomerName" class="form-control" placeholder="กรุณากรอกชื่อและนามสกุล" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">เบอร์โทรศัพท์ <span class="text-danger">*</span></label>
+                    <input asp-for="Phone" class="form-control" placeholder="08X-XXX-XXXX" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">ที่อยู่จัดส่งสินค้า <span class="text-danger">*</span></label>
+                    <textarea asp-for="Address" class="form-control" rows="3" placeholder="บ้านเลขที่, ถนน, แขวง/ตำบล, เขต/อำเภอ, จังหวัด, รหัสไปรษณีย์" required></textarea>
+                </div>
+
+                <hr class="my-4">
+
+                <!-- ส่วนโอนเงินและอัปโหลดสลิป -->
+                <div class="mb-4">
+                    <h6 class="fw-bold text-primary mb-2"><i class="bi bi-qr-code me-1"></i> ข้อมูลการชำระเงิน</h6>
+                    <p class="small text-muted mb-2">ธนาคารกสิกรไทย เลขที่บัญชี: <strong>123-4-56789-0</strong> (บจก. โกลว์ บิวตี้)</p>
+                    
+                    <label class="form-label fw-semibold mt-2">แนบหลักฐานการโอนเงิน (สลิป):</label>
+                    <input type="file" name="slipFile" class="form-control" accept="image/*" required />
+                </div>
+
+                <button type="submit" class="btn btn-pastel w-100 py-3 fs-5">
+                    <i class="bi bi-send-check me-2"></i>ยืนยันการแจ้งชำระเงิน
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

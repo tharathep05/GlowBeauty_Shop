@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+Thai:wght@300;400;500;600&family=Prompt:wght@300;400;500;600&display=swap');
+
+:root {
+    --luxury-black: #111111;
+    --luxury-gold: #c5a085;
+    --luxury-gold-dark: #a88368;
+    --luxury-bg: #faf8f5;
+    --luxury-border: #e8e2d9;
+    --font-heading: 'Cormorant Garamond', 'Noto Serif Thai', serif;
+    --font-body: 'Prompt', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: #ffffff;
+    color: #222222;
+    letter-spacing: 0.2px;
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, .font-serif, .navbar-brand {
+    font-family: var(--font-heading) !important;
+}
+
+.tracking-wide {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.tracking-medium {
+    letter-spacing: 1px;
+}
+
+/* Luxury Buttons */
+.btn-luxury {
+    background-color: var(--luxury-black);
+    color: #ffffff;
+    border: 1px solid var(--luxury-black);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+    .btn-luxury:hover {
+        background-color: var(--luxury-gold);
+        border-color: var(--luxury-gold);
+        color: #ffffff;
+    }
+
+.btn-luxury-outline {
+    background-color: transparent;
+    color: var(--luxury-black);
+    border: 1px solid var(--luxury-black);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+    .btn-luxury-outline:hover {
+        background-color: var(--luxury-black);
+        color: #ffffff;
+    }
+
+.btn-gold {
+    background-color: var(--luxury-gold);
+    color: #ffffff;
+    border: 1px solid var(--luxury-gold);
+    transition: all 0.3s ease;
+}
+
+    .btn-gold:hover {
+        background-color: var(--luxury-gold-dark);
+        color: #ffffff;
+    }
+
+/* Product Cards Aesthetic */
+.card-luxury {
+    border: 1px solid var(--luxury-border) !important;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    background-color: #ffffff;
+}
+
+    .card-luxury:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06) !important;
+        border-color: var(--luxury-gold) !important;
+    }
+
+    .card-luxury .card-img-top {
+        transition: transform 0.6s ease;
+    }
+
+    .card-luxury:hover .card-img-top {
+        transform: scale(1.04);
+    }
+
+/* Luxury Badges */
+.badge-gold-subtle {
+    background-color: var(--luxury-bg);
+    color: var(--luxury-gold-dark);
+    border: 1px solid var(--luxury-border);
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.5px;
+}
+
+.badge-dark-subtle {
+    background-color: #f4f4f4;
+    color: #444444;
+    border: 1px solid #e5e5e5;
+    font-weight: 400;
+    font-size: 0.72rem;
+}

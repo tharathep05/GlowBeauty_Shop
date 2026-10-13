@@ -1,0 +1,65 @@
+﻿@model IEnumerable<GlowBeauty_Shop.Models.Order>
+@{
+    ViewData["Title"] = "ประวัติรายการสั่งซื้อ";
+}
+
+<div class="container my-4">
+    <h2 class="fw-bold text-danger mb-4"><i class="bi bi-receipt me-2"></i>ประวัติรายการสั่งซื้อทั้งหมด</h2>
+
+    <div class="card card-pink p-3">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>เลขที่</th>
+                        <th>วันที่สั่งซื้อ</th>
+                        <th>ชื่อลูกค้า</th>
+                        <th>สินค้า</th>
+                        <th>ราคารวม</th>
+                        <th>สลิป</th>
+                        <th>สถานะ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center py-4 text-muted">ยังไม่มีรายการสั่งซื้อ</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>#@item.Id</td>
+                                <td>@item.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>
+                                    <strong>@item.CustomerName</strong><br />
+                                    <small class="text-muted">@item.Phone</small>
+                                </td>
+                                <td>@item.Product?.Name</td>
+                                <td class="fw-bold text-danger">฿@item.TotalPrice.ToString("N0")</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.SlipPath))
+                                    {
+                                        <a href="@item.SlipPath" target="_blank" class="btn btn-sm btn-outline-danger">
+                                            <i class="bi bi-image"></i> ดูสลิป
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted small">ไม่มีสลิป</span>
+                                    }
+                                </td>
+                                <td>
+                                    <span class="badge bg-success">@item.Status</span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

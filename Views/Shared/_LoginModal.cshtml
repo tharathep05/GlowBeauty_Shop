@@ -1,0 +1,86 @@
+﻿<!-- Views/Shared/_LoginModal.cshtml -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 440px;">
+        <div class="modal-content rounded-0 border-0 shadow-lg p-3 p-md-4" style="background-color: #ffffff;">
+            
+            <!-- ปุ่มปิด Modal -->
+            <div class="text-end mb-2">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 0.8rem;"></button>
+            </div>
+
+            <!-- หัวข้อ MY ACCOUNT -->
+            <div class="text-center mb-4">
+                <h2 class="font-serif fw-bold text-uppercase text-dark tracking-wide mb-1" style="font-size: 1.8rem; letter-spacing: 3px;">
+                    MY ACCOUNT
+                </h2>
+                <p class="text-muted small tracking-medium" style="font-size: 0.82rem; letter-spacing: 1px;">
+                    เข้าสู่ระบบเพื่อรับสิทธิพิเศษสมาชิก
+                </p>
+                <div class="mx-auto mt-2" style="width: 40px; height: 1px; background-color: #c5a059;"></div>
+            </div>
+
+            <!-- ฟอร์มเข้าสู่ระบบ -->
+            <form asp-controller="Account" asp-action="Login" method="post">
+                @Html.AntiForgeryToken()
+
+                <!-- กรอกอีเมล / หมายเลขโทรศัพท์ -->
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control rounded-0 border-0 border-bottom px-0 shadow-none" id="loginEmail" name="Email" placeholder="name@example.com" required="required" style="border-color: #e0e0e0 !important; font-size: 0.9rem;" />
+                    <label for="loginEmail" class="px-0 text-muted small">อีเมล / หมายเลขโทรศัพท์</label>
+                </div>
+
+                <!-- กรอกรหัสผ่าน -->
+                <div class="form-floating mb-2">
+                    <input type="password" class="form-control rounded-0 border-0 border-bottom px-0 shadow-none" id="loginPassword" name="Password" placeholder="Password" required="required" style="border-color: #e0e0e0 !important; font-size: 0.9rem;" />
+                    <label for="loginPassword" class="px-0 text-muted small">รหัสผ่าน</label>
+                </div>
+
+                <!-- จดจำฉันไว้ & ลืมรหัสผ่าน -->
+                <div class="d-flex justify-content-between align-items-center mb-4 pt-1">
+                    <div class="form-check">
+                        <input class="form-check-input rounded-0" type="checkbox" id="rememberMe" name="RememberMe" style="cursor: pointer;" />
+                        <label class="form-check-label small text-muted" for="rememberMe" style="font-size: 0.8rem; cursor: pointer;">
+                            จดจำฉันไว้
+                        </label>
+                    </div>
+                    <a href="#" class="small text-muted text-decoration-none" style="font-size: 0.8rem;">ลืมรหัสผ่าน?</a>
+                </div>
+
+                <!-- ปุ่มเข้าสู่ระบบหลัก -->
+                <button type="submit" class="btn w-100 rounded-0 py-3 text-white text-uppercase tracking-wide fw-semibold mb-4" style="background-color: #111111; letter-spacing: 2px; font-size: 0.85rem;">
+                    เข้าสู่ระบบ
+                </button>
+            </form>
+
+            <!-- เส้นคั่นตัวเลือก Social Login -->
+            <div class="position-relative text-center mb-4">
+                <hr class="text-muted opacity-25 m-0" />
+                <span class="position-absolute top-50 start-50 translate-middle px-3 bg-white text-muted small" style="font-size: 0.75rem; letter-spacing: 1px;">
+                    หรือเข้าสู่ระบบด้วย
+                </span>
+            </div>
+
+            <!-- ปุ่ม Social Login (LINE & Facebook) -->
+            <div class="d-grid gap-2 mb-4">
+                <a asp-controller="Account" asp-action="LineLogin" class="btn rounded-0 py-2 d-flex align-items-center justify-content-center gap-2 border-0 text-white" style="background-color: #06C755; font-size: 0.85rem;">
+                    <i class="bi bi-line fs-5"></i>
+                    <span>เข้าสู่ระบบด้วย LINE</span>
+                </a>
+
+                <a asp-controller="Account" asp-action="FacebookLogin" class="btn rounded-0 py-2 d-flex align-items-center justify-content-center gap-2 border-0 text-white" style="background-color: #1877F2; font-size: 0.85rem;">
+                    <i class="bi bi-facebook fs-5"></i>
+                    <span>เข้าสู่ระบบด้วย Facebook</span>
+                </a>
+            </div>
+
+            <!-- สมัครบัญชีใหม่ -->
+            <div class="text-center pt-3 border-top">
+                <span class="small text-muted me-1" style="font-size: 0.82rem;">ยังไม่มีบัญชีสมาชิก?</span>
+                <a asp-controller="Account" asp-action="Register" class="small fw-bold text-dark text-uppercase tracking-wide text-decoration-underline" style="font-size: 0.82rem; letter-spacing: 1px;">
+                    สมัครบัญชีใหม่
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
